@@ -1,0 +1,15 @@
+.uploader {
+  display: flex;
+  padding-top: 20%;
+  justify-content: center;
+}
+
+.downloaded > a {
+  padding-top: 9.5px;
+}
+
+.downloaded {
+  display: flex;
+  padding-top: 28px;
+  flex-direction: column;
+}
