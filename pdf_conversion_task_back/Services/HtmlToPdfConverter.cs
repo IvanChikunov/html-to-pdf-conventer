@@ -11,8 +11,6 @@ namespace Pdf_Conversion_Task.Services
         {
             try
             {
-
-
                 var htmlString = new StringBuilder();
                 using (var reader = new StreamReader(file.OpenReadStream()))
                 {
@@ -20,39 +18,12 @@ namespace Pdf_Conversion_Task.Services
                         htmlString.AppendLine(await reader.ReadLineAsync());
                 }
                 var html = htmlString.ToString();
-
-                //file.CopyTo(memoryStream);
-                //string html = Convert.ToBase64String(memoryStream.ToArray());
-
-
-                //var browserFetcher = new BrowserFetcher(new BrowserFetcherOptions()
-                //{
-                //    Path = Path.GetTempPath()
-                //});
-
-                //await browserFetcher.DownloadAsync(BrowserFetcher.DefaultRevision);
-
-                //var launchOptions = new LaunchOptions()
-                //{
-                //    ExecutablePath = browserFetcher.RevisionInfo(BrowserFetcher.DefaultRevision).ExecutablePath,
-                //    Headless = true
-                //};
-
-
-
-
                 var chromePath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
                 chromePath += @"Program Files\Google\Chrome\Application\chrome.exe";
-
-
-                //var pdfOptions = new PdfOptions();
-                //pdfOptions.Format = PuppeteerSharp.Media.PaperFormat.A4;
-
                 using (var browser = await Puppeteer.LaunchAsync(new LaunchOptions
                 {
                     Headless = true,
                     Browser = SupportedBrowser.Chrome,
-                    //ExecutablePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".local-chromium", "Win64-884014", "chrome-win", "UserData").Replace(@"\", @"\\"),
                     ExecutablePath = chromePath,
                 }))
                 {
@@ -63,8 +34,6 @@ namespace Pdf_Conversion_Task.Services
                         await page.PdfAsync($"{file.Name}.pdf", pdfOptions);
 
                         return await page.PdfDataAsync();
-                        //var result = new FileStreamResult(stream, "application/pdf");
-                        //return blob;
                     }
                 }
 

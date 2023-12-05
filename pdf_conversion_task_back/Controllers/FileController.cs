@@ -16,8 +16,6 @@ namespace Pdf_Conversion_Task.Controllers
         {
             var result = await HtmlToPdfConverter.ConvertFile(file);
             return File(result, "application/pdf", file.FileName + ".pdf");
-            //return File(result, "application/pdf");
-            //return result;
         }
     }
 }

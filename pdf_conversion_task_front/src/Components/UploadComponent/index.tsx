@@ -33,20 +33,12 @@ const UploadComponent = () => {
       .then((response) => response.blob())
       .then((blob) => {
         const url = window.URL.createObjectURL(new Blob([blob]));
-        //const link = document.createElement("a");
-        //link.href = url;
-        //link.setAttribute("download", `${(file as RcFile).name}.pdf`);
 
         setDownloadedFileList((state) => [
           ...state,
           { name: `${(file as RcFile).name}.pdf`, url: url },
         ]);
 
-        //document.body.appendChild(link);
-
-        //link.click();
-
-        //link.parentNode?.removeChild(link);
       })
       .catch(() => message.error("Не удалось обработать запрос"));
   };
@@ -76,19 +68,7 @@ const UploadComponent = () => {
       }
       if (info.file.status === "done") {
         message.success(`${info.file.name} file uploaded successfully`);
-        //setDownloadedFileList((state) => [info.file.response, ...state]);
         console.log(info.file.response);
-        /*const url = window.URL.createObjectURL(new Blob([info.file.response]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", `${info.file.name}.pdf`);
-
-        document.body.appendChild(link);
-
-        link.click();
-
-        link.parentNode?.removeChild(link);
-        window.open(info.file.response, "fullscreen=yes");*/
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }
